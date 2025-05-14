@@ -2,24 +2,24 @@ const BaseRepository = require('./BaseRepository');
 const redis = require('../config/RedisFactory').getClient();
 
 class RedisHotelRepository extends BaseRepository {
-  // Create a hotel entry in Redis using hotel.id as the key
+  
   async create(hotel) {
-    const key = `hotel:${hotel.id}`;  // Use id instead of name
+    const key = `hotel:${hotel.id}`;  
     await redis.set(key, JSON.stringify(hotel));
-    return { status: 'saved', key };
+    return { status: 'saved', key };                            // Hotel data ko Redis mein store karta hai. Redis mein key "hotel:<hotel_name>" set ki jati hai.
   }
 
-  // Delete a hotel entry from Redis using hotel.id as the key
+  
   async delete(id) {
-    const key = `hotel:${id}`;  // Use id instead of name
-    await redis.del(key);
+    const key = `hotel:${id}`;  
+    await redis.del(key);                                 // Hotel data ko Redis se delete karta hai using DEL command.
     return { status: 'deleted', key };
   }
 
-  // Find a hotel by id from Redis
+  
   async find(id) {
-    const key = `hotel:${id}`;  // Use id instead of name
-    const data = await redis.get(key);
+    const key = `hotel:${id}`;  
+    const data = await redis.get(key);                  // Redis mein se hotel data fetch karta hai, agar milta hai toh return karta hai, nahi milta toh
     return data ? JSON.parse(data) : null;
   }
 }

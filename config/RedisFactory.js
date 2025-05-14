@@ -1,4 +1,4 @@
-const { createClient } = require('redis');
+const { createClient } = require('redis');           // Isme Redis connection URL diya gaya hai jahan se Redis Cloud connect hota hai.
 
 // Redis Client create karna
 const redisClient = createClient({
@@ -9,7 +9,7 @@ const redisClient = createClient({
 redisClient.on('error', (err) => console.error('Redis Client Error', err));
 
 // Redis Connection function
-const connectRedis = async () => {
+const connectRedis = async () => {                           // Yeh function Redis server se connection establish karta hai
   try {
     await redisClient.connect();
     console.log("🔌 Connected to Redis Cloud");
