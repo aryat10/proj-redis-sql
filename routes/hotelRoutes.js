@@ -1,9 +1,9 @@
 const express = require('express');
-const { createHotel, getHotel } = require('../controllers/hotelController');
-
+const { createHotel, getHotel, deleteHotel } = require('../controllers/hotelController');
 const router = express.Router();
 
-router.post('/hotel', createHotel);   // POST route
-router.get('/hotel/:id', getHotel);   // GET route
+router.post('/hotel', createHotel);
+router.get('/hotel/:id', getHotel);
+router.delete('/hotel/:id', deleteHotel);
 
-module.exports = router;     // yahan pr saari post request handle ho jaygi... 
+module.exports = router;
